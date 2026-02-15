@@ -1,13 +1,46 @@
-# EoleProject
-Flight price analyzer based on a duration not a fix start/end date
+# 🌬️ Eole
 
-# Goal
-Creating an API wrapper which will have one purpose: Based on a duration (ex 2weeks), 2 localisation (ex Departure: Paris / Arrival: Seoul) and a range (ex 6 months or 1 year), my code using API flight will calculate all the date combination get the price (round flight first) and submit the cheapest combination. 
-The purpose is simple providing a solution to a market where all the price analyser are based on a fix date range (± 3 days for some) -> And allowing people to prepare vacation based on the cheapest flight ticket for their dream destination.
-On my end, the goal will be to perform a solo fun agile project while renforcing my programmation skills. Performing a software engineering like project and having fun discovering API coding.
-I'm actually planning my MVP as a CLI program first.
+Flight price analyzer based on **trip duration**, not fixed start/end dates.
 
-The architecture of the python code will follow a Domain Driven Design (DDD) architecture, and POO code:
+---
+
+## 🎯 Concept
+
+Most flight search engines require fixed departure and return dates (± 3 days flexibility at best).
+
+Eole takes a different approach:
+
+Instead of choosing *when* to travel,
+you choose:
+
+- ✈️ Departure location (e.g. Paris)
+- 🌏 Destination (e.g. Seoul)
+- ⏳ Trip duration (e.g. 2 weeks)
+- 📅 Search window (e.g. next 6 months or 1 year)
+
+The engine calculates all valid date combinations and finds the cheapest round-trip option.
+
+---
+
+## 🚀 Goal
+
+### Product Goal
+Provide a smarter way to plan vacations based on the **cheapest available period** rather than fixed dates.
+
+### Personal Goal
+- Build a serious solo project using Agile methodology
+- Practice Domain Driven Design (DDD)
+- Improve OOP skills
+- Learn API integration properly
+- Deliver a clean CLI MVP first
+
+---
+
+## 🏗️ Architecture
+
+The project follows a simplified Domain Driven Design (DDD) structure.
+
+```text
 eole/
 │
 ├── domain/
@@ -24,3 +57,35 @@ eole/
 │   └── notifications/
 │
 └── main.py
+```
+
+---
+
+## 🧪 MVP Scope
+
+Initial version:
+
+- CLI-based program
+- Round-trip flights only
+- Single provider API
+- No database
+- No notifications
+
+---
+
+## 🛣️ Roadmap
+
+- [Sprint 1] Date range generator
+- [Sprint 2-3] API flight provider integration
+- [Sprint 4] Cheapest price selection logic
+- [Sprint 5-6] CLI interface
+- [Sprint 7] Logging & error handling
+
+---
+
+## 🧠 Tech Stack
+
+- Python 3.x
+- OOP
+- DDD (light version)
+- REST API integration
