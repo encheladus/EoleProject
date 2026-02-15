@@ -41,21 +41,19 @@ Provide a smarter way to plan vacations based on the **cheapest available period
 The project follows a simplified Domain Driven Design (DDD) structure.
 
 ```text
-eole/
-│
+EoleProject/
 ├── domain/
 │   ├── trip.py
 │   ├── price.py
-│   └── search_policy.py
-│
+│   └── date_range_generator.py
 ├── application/
 │   └── search_use_case.py
-│
 ├── infrastructure/
 │   ├── providers/
 │   ├── database/
 │   └── notifications/
-│
+├── tests/
+│   ├── test_date_range_generator.py
 └── main.py
 ```
 
