@@ -13,4 +13,4 @@ class DateRangeGenerator:
         # Replacing the while loop by a for loop 
         # delta = (end_date - start_date).days
         # return [start_date + timedelta(days=i) for i in range(delta + 1)]
-    return dates_list
+        return dates_list

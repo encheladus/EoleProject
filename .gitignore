@@ -1,0 +1,15 @@
+# Python
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+venv/
+env/
+*.sqlite3
+
+# IDE
+.idea/
+*.iml
+
+# Mac/Linux
+.DS_Store
