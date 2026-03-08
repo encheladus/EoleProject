@@ -6,7 +6,7 @@ from infrastructure.flight_search_service import FlightSearchService
 def mock_amadeus_client():
     # mock the client returned by get_client()
     mock_client_instance = MagicMock()
-    mock_client_instance.shopping.flight_offers.get.return_value.data = [
+    mock_client_instance.shopping.flight_offers_search.get.return_value.data = [
         {"price": {"total": "123.45"}}
     ]
 
@@ -25,7 +25,7 @@ def test_search_flight_success(mock_amadeus_client):
     assert result[0]["price"] == "123.45"
 
 def test_search_flight_no_data(mock_amadeus_client):
-    mock_amadeus_client.get_client.return_value.shopping.flight_offers.get.return_value.data = []
+    mock_amadeus_client.get_client.return_value.shopping.flight_offers_search.get.return_value.data = []
 
     service = FlightSearchService(mock_amadeus_client)
     trips = [
@@ -35,7 +35,7 @@ def test_search_flight_no_data(mock_amadeus_client):
     assert result[0]["price"] is None
 
 def test_search_flight_exception(mock_amadeus_client):
-    mock_amadeus_client.get_client.return_value.shopping.flight_offers.get.side_effect = Exception("API down")
+    mock_amadeus_client.get_client.return_value.shopping.flight_offers_search.get.side_effect = Exception("API down")
 
     service = FlightSearchService(mock_amadeus_client)
     trips = [

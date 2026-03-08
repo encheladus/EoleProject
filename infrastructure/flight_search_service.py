@@ -27,7 +27,7 @@ class FlightSearchService:
 
             # --- Step 2: Calling amadeus API with error handling ---
             try:
-                response = self.client.shopping.flight_offers.get(**params_amadeus)
+                response = self.client.shopping.flight_offers_search.get(**params_amadeus)
                 if response.data:
                     trip["price"] = response.data[0]["price"].get("total", None)
                     logger.info(f"Flight found for {origin}->{destination}: {trip['price']}")
