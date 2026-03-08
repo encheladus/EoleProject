@@ -19,14 +19,12 @@ def test_format_combinations_normal():
             "return_date": "2026-01-15",
             "destination": "Seoul",
             "origin": "Paris",
-            "price": None
         },
         {
             "departure_date": "2026-01-02",
             "return_date": "2026-01-16",
             "destination": "Seoul",
             "origin": "Paris",
-            "price": None
         }
     ]
 
