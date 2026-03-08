@@ -1,5 +1,3 @@
-from datetime import date
-
 class TravelFormatter:
 
     @staticmethod
@@ -10,7 +8,6 @@ class TravelFormatter:
           "departure_date": dep.isoformat(),
           "return_date": ret.isoformat(),
           "destination": destination,
-          "origin": origin,
-          "price": None
+          "origin": origin
         })
       return formatted
