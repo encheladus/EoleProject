@@ -5,8 +5,10 @@ from domain.travel_combination_generator import TravelCombinationGenerator
 from domain.travel_formatter import TravelFormatter
 from infrastructure.amadeus_client import AmadeusClient
 from application.flight_search_service import FlightSearchService
+from infrastructure.cache.hybrid_flight_cache import HybridFlightCache
 
 load_dotenv()
+cache = HybridFlightCache()
 
 #I first need the starting date, the trip duration, and the search period:
 
@@ -36,7 +38,7 @@ trips = TravelFormatter.format_combinations(trip_combinations, origin, destinati
 
 #Finally, I use my FlightSearchService:
 amadeus_client = AmadeusClient()
-flight_service = FlightSearchService(amadeus_client)
+flight_service = FlightSearchService(amadeus_client, cache=cache)
 
 trips_with_prices =flight_service.search_flight(trips)
 
@@ -49,4 +51,11 @@ For how long? (in days)               21
 Which period do you want to search for the best price? (in days)  180
 Departure airport code:               CDG
 Arrival airport code:                 ICN
+
+
+When do you want to go? (YYYY-MM-DD) 2026-03-09
+For how long? (in days) 21
+Which period do you want to search for the best price? (in days) 30
+Departure airport code: ICN
+Arrival airport code: CDG
 '''

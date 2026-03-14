@@ -1,9 +1,9 @@
 import time
 
-class FlightCache:
+class RamFlightCache:
 
     _cache = {}
-    _ttl = 86400  # 24h
+    _ttl =  24 * 3600  # 24h
 
     @classmethod
     def get(cls, key):
