@@ -1,10 +1,10 @@
-from datetime import date, datetime
+from datetime import datetime
 from dotenv import load_dotenv
 from domain.vacation_period_calculator import VacationPeriodCalculator
 from domain.travel_combination_generator import TravelCombinationGenerator
 from domain.travel_formatter import TravelFormatter
 from infrastructure.amadeus_client import AmadeusClient
-from infrastructure.flight_search_service import FlightSearchService
+from application.flight_search_service import FlightSearchService
 
 load_dotenv()
 

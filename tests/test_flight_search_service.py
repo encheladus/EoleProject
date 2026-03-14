@@ -1,6 +1,6 @@
 import pytest
 from unittest.mock import MagicMock
-from infrastructure.flight_search_service import FlightSearchService
+from application.flight_search_service import FlightSearchService
 
 @pytest.fixture
 def mock_amadeus_client():
@@ -43,3 +43,38 @@ def test_search_flight_exception(mock_amadeus_client):
     ]
     result = service.search_flight(trips)
     assert result[0]["price"] is None
+
+def test_search_flight_cache_hit(mock_amadeus_client):
+    mock_cache = MagicMock()
+    mock_cache.has.return_value = True
+    mock_cache.get.return_value = "999.99"
+
+    service = FlightSearchService(mock_amadeus_client, cache=mock_cache)
+
+    trips = [
+        {"departure_date": "2026-04-01", "return_date": "2026-04-05", "origin": "CDG", "destination": "LON"}
+    ]
+
+    result = service.search_flight(trips)
+
+    assert result[0]["price"] == "999.99"
+
+    # Ensure no API call is made
+    mock_amadeus_client.get_client.return_value.shopping.flight_offers_search.get.assert_not_called()
+
+def test_search_flight_cache_miss(mock_amadeus_client):
+    mock_cache = MagicMock()
+    mock_cache.has.return_value = False
+
+    service = FlightSearchService(mock_amadeus_client, cache=mock_cache)
+
+    trips = [
+        {"departure_date": "2026-04-01", "return_date": "2026-04-05", "origin": "CDG", "destination": "LON"}
+    ]
+
+    result = service.search_flight(trips)
+
+    assert result[0]["price"] == "123.45"
+
+    # Check the result in the cache well stocked
+    mock_cache.set.assert_called_once()
