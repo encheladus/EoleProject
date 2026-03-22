@@ -6,6 +6,7 @@ from domain.travel_formatter import TravelFormatter
 from infrastructure.amadeus_client import AmadeusClient
 from application.flight_search_service import FlightSearchService
 from infrastructure.cache.hybrid_flight_cache import HybridFlightCache
+from domain.cheapest_trip_finder import CheapestTripFinder
 
 load_dotenv()
 cache = HybridFlightCache()
@@ -41,9 +42,15 @@ amadeus_client = AmadeusClient()
 flight_service = FlightSearchService(amadeus_client, cache=cache)
 
 trips_with_prices =flight_service.search_flight(trips)
+cheapest_trip = CheapestTripFinder.find_cheapest(trips_with_prices)
 
-for trip in trips_with_prices:
-    print(trip)
+if cheapest_trip:
+    print(
+        f"Go on {cheapest_trip['departure_date']} to {cheapest_trip['return_date']}.\n"
+        f"Cheapest price: {cheapest_trip['price']}"
+    )
+else:
+    print("No valid flight price found.")
 
 '''
 When do you want to go? (YYYY-MM-DD)  2026-03-09
