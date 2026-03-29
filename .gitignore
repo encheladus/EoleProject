@@ -8,6 +8,7 @@ venv/
 
 # Data
 flight_cache.json
+
 # Secrets
 .env
 .env.*
