@@ -26,7 +26,7 @@ def test_find_cheapest_returns_all_cheapest_trips():
         }
     ]
 
-    result = CheapestTripFinder.find_cheapest(trips)
+    cheapest_trips, average_price = CheapestTripFinder.find_cheapest(trips)
 
     expected = [
         {
@@ -45,7 +45,8 @@ def test_find_cheapest_returns_all_cheapest_trips():
         }
     ]
 
-    assert result == expected
+    assert cheapest_trips == expected
+    assert average_price == round((214.59 + 214.59 + 300.00) / 3, 2)
 
 
 def test_find_cheapest_ignores_none_prices():
@@ -73,10 +74,11 @@ def test_find_cheapest_ignores_none_prices():
         }
     ]
 
-    result = CheapestTripFinder.find_cheapest(trips)
+    cheapest_trips, average_price = CheapestTripFinder.find_cheapest(trips)
 
-    assert len(result) == 2
-    assert all(trip["price"] == "214.59" for trip in result)
+    assert len(cheapest_trips) == 2
+    assert all(trip["price"] == "214.59" for trip in cheapest_trips)
+    assert average_price == 214.59
 
 
 def test_find_cheapest_returns_single_trip_if_only_one_cheapest():
@@ -104,11 +106,12 @@ def test_find_cheapest_returns_single_trip_if_only_one_cheapest():
         }
     ]
 
-    result = CheapestTripFinder.find_cheapest(trips)
+    cheapest_trips, average_price = CheapestTripFinder.find_cheapest(trips)
 
-    assert len(result) == 1
-    assert result[0]["price"] == "214.59"
-    assert result[0]["departure_date"] == "2026-05-10"
+    assert len(cheapest_trips) == 1
+    assert cheapest_trips[0]["price"] == "214.59"
+    assert cheapest_trips[0]["departure_date"] == "2026-05-10"
+    assert average_price == (400.00 + 214.59 + 300.00) / 3
 
 
 def test_find_cheapest_returns_none_if_no_valid_price():
@@ -129,6 +132,7 @@ def test_find_cheapest_returns_none_if_no_valid_price():
         }
     ]
 
-    result = CheapestTripFinder.find_cheapest(trips)
+    cheapest_trips, average_price = CheapestTripFinder.find_cheapest(trips)
 
-    assert result is None
+    assert cheapest_trips is None
+    assert average_price is None
