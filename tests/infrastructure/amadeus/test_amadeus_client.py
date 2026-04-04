@@ -1,6 +1,6 @@
 import pytest
-from infrastructure.amadeus_client import AmadeusClient
-import os
+from infrastructure.amadeus.amadeus_client import AmadeusClient
+
 
 # Normal case → Initialization OK
 # Error case → Initialization KO

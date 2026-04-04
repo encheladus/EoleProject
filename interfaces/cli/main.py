@@ -3,7 +3,7 @@ from dotenv import load_dotenv
 from domain.vacation_period_calculator import VacationPeriodCalculator
 from domain.travel_combination_generator import TravelCombinationGenerator
 from domain.travel_formatter import TravelFormatter
-from infrastructure.amadeus_client import AmadeusClient
+from infrastructure.amadeus.amadeus_client import AmadeusClient
 from application.flight_search_service import FlightSearchService
 from infrastructure.cache.hybrid_flight_cache import HybridFlightCache
 from domain.cheapest_trip_finder import CheapestTripFinder
