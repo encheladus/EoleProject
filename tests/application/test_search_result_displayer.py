@@ -7,14 +7,16 @@ def test_format_cheapest_trips():
             "return_date": "2026-05-30",
             "origin": "ICN",
             "destination": "CDG",
-            "price": "214.59"
+            "price": "214.59",
+            "booking_link": "https://www.cheapest.co.uk/"
         },
         {
             "departure_date": "2026-05-10",
             "return_date": "2026-05-31",
             "origin": "ICN",
             "destination": "CDG",
-            "price": "214.59"
+            "price": "214.59",
+            "booking_link": "https://www.cheapest.co.uk/"
         }
         ]
 

@@ -7,8 +7,9 @@ def format_cheapest_trips(trips: list[dict], average_price: float) -> str:
     trip_price = float(first_trip["price"])
     economy_made = average_price - trip_price
 
-    date_lines = [
-        f"- {trip['departure_date']} to {trip['return_date']}"
+    date_lines_and_link = [
+        (f"- {trip['departure_date']} to {trip['return_date']}\n"
+         f"Link: {trip.get('booking_link', 'N/A')}")
         for trip in trips
     ]
 
@@ -18,5 +19,5 @@ def format_cheapest_trips(trips: list[dict], average_price: float) -> str:
         f"Price: {trip_price:.2f}€\n"
         f"Average price: {average_price:.2f}€\n"
         f"Savings: {economy_made:.2f}€\n"
-        f"You can go on:\n" + "\n".join(date_lines)
+        f"You can go on:\n" + "\n".join(date_lines_and_link)
     )
