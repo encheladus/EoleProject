@@ -33,7 +33,7 @@ class FlightSearchService:
                     return_date=return_date,
                 )
 
-                if self.cache:
+                if self.cache and offer is not None:
                     self.cache.set(key, offer)
 
             if offer:
