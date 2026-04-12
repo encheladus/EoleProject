@@ -9,12 +9,10 @@ from domain.cheapest_trip_finder import CheapestTripFinder
 from application.flight_search_service import FlightSearchService
 from application.search_result_displayer import format_cheapest_trips
 
-from infrastructure.cache.hybrid_flight_cache import HybridFlightCache
 from infrastructure.serp_api.serp_api_client import SerpApiClient
 from infrastructure.serp_api.serp_api_flight_provider import SerpApiFlightProvider
 
 load_dotenv()
-cache = HybridFlightCache()
 
 # I first need the starting date, the trip duration, and the search period:
 start_date_str = input("When do you want to go? (YYYY-MM-DD) ")
