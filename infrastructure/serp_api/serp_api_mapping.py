@@ -1,7 +1,7 @@
 from domain.flight_offer import FlightOffer
 
 
-def map_serpapi_to_offer(results: dict) -> list[FlightOffer]:
+def map_serpapi_to_offers(results: dict) -> list[FlightOffer]:
     flights = results.get("best_flights") or results.get("other_flights") or []
 
     offers = []

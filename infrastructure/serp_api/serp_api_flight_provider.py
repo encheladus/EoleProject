@@ -2,6 +2,7 @@ import logging
 from serpapi import GoogleSearch
 
 from domain.flight_offer import FlightOffer
+from infrastructure.serp_api.serp_api_mapping import map_serpapi_to_offers
 
 logger = logging.getLogger(__name__)
 
@@ -35,10 +36,9 @@ class SerpApiFlightProvider:
 
             results = search.get_dict()
 
-            status = results.get("search_metadata", {}).get("status")
             error = results.get("error")
 
-            print("STATUS:", status)
+            print("STATUS:", results.get("search_metadata", {}).get("status"))
             print("ERROR:", error)
             print("URL:", results.get("search_metadata", {}).get("google_flights_url"))
 
@@ -46,27 +46,15 @@ class SerpApiFlightProvider:
                 logger.warning(f"SerpApi error for {origin}->{destination}: {error}")
                 return None
 
-            best_flights = results.get("best_flights", [])
-            other_flights = results.get("other_flights", [])
-            all_flights = best_flights + other_flights
+            offers = map_serpapi_to_offers(results)
 
-            print("BEST:", len(best_flights), "OTHER:", len(other_flights))
-
-            if not all_flights:
+            if not offers:
                 logger.warning(f"No flight found for {origin}->{destination}")
                 return None
 
-            cheapest = min(all_flights, key=lambda x: x.get("price", float("inf")))
-            raw_price = cheapest.get("price")
+            cheapest = min(offers, key=lambda x: x.price)
 
-            if raw_price is None:
-                logger.warning(f"No price found for {origin}->{destination}")
-                return None
-
-            return FlightOffer(
-                price=float(raw_price),
-                booking_link = results.get("search_metadata", {}).get("google_flights_url"),
-            )
+            return cheapest
 
         except Exception as e:
             logger.exception(f"Error fetching flight: {e}")
