@@ -42,7 +42,7 @@ trips = TravelFormatter.format_combinations(trip_combinations, origin, destinati
 # Finally, I use my FlightSearchService:
 serp_api_client = SerpApiClient()
 serp_api_provider = SerpApiFlightProvider(serp_api_client)
-flight_service = FlightSearchService(serp_api_provider, cache=cache)
+flight_service = FlightSearchService(serp_api_provider)
 
 trips_with_prices = flight_service.search_flight(trips)
 cheapest_trip, average_price = CheapestTripFinder.find_cheapest(trips_with_prices)
