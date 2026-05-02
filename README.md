@@ -76,8 +76,8 @@ Initial version:
 - [Sprint 1] Date range generator
 - [Sprint 2-3] API flight provider integration
 - [Sprint 4] Cheapest price selection logic
-- [Sprint 5-6] CLI interface
-- [Sprint 7] Logging & error handling
+- [Sprint 5-6] Database
+- [Sprint 7] CLI interface
 
 ---
 
