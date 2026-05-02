@@ -1,5 +1,5 @@
 import sqlite3
-from datetime import datetime
+from datetime import datetime, timezone
 
 class FlightSearchDatabase:
     def __init__(self):
@@ -52,7 +52,7 @@ class FlightSearchDatabase:
 
 
     def insert_result(self, trips: dict, search_id: int, provider: str):
-        trip_result = (trips["departure_date"], trips["return_date"], trips["price"], trips["booking_link"], provider, datetime.utcnow().isoformat(), search_id)
+        trip_result = (trips["departure_date"], trips["return_date"], trips["price"], trips["booking_link"], provider, datetime.now(timezone.utc), search_id)
         cursor = self.connection.cursor()
         cursor.execute("""
                     INSERT INTO flight_offer_snapshot(departure_date, 
