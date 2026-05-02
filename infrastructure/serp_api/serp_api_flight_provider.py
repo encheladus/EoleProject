@@ -1,5 +1,5 @@
 import logging
-from serpapi import GoogleSearch
+from serpapi.google_search import GoogleSearch
 
 from domain.flight_offer import FlightOffer
 from infrastructure.serp_api.serp_api_mapping import map_serpapi_to_offers
