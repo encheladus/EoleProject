@@ -7,5 +7,5 @@ def map_search(origin: str, destination: str, stay_duration: int, search_period:
         "destination": destination.strip().upper(),
         "stay_duration": stay_duration,
         "search_period": search_period,
-        "created_at": datetime.now(timezone.utc)
+        "created_at": datetime.now(timezone.utc).isoformat()
     }

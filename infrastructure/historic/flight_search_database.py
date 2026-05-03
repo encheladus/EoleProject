@@ -2,8 +2,8 @@ import sqlite3
 from datetime import datetime, timezone
 
 class FlightSearchDatabase:
-    def __init__(self):
-        self.connection = sqlite3.connect("eole.db")
+    def __init__(self, db_path = "eole.db"):
+        self.connection = sqlite3.connect(db_path)
 
         self.connection.execute("PRAGMA foreign_keys = ON")
 
@@ -52,7 +52,7 @@ class FlightSearchDatabase:
 
 
     def insert_result(self, trips: dict, search_id: int, provider: str):
-        trip_result = (trips["departure_date"], trips["return_date"], trips["price"], trips["booking_link"], provider, datetime.now(timezone.utc), search_id)
+        trip_result = (trips["departure_date"], trips["return_date"], trips["price"], trips["booking_link"], provider, datetime.now(timezone.utc).isoformat(), search_id)
         cursor = self.connection.cursor()
         cursor.execute("""
                     INSERT INTO flight_offer_snapshot(departure_date, 
