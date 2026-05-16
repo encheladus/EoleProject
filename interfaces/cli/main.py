@@ -54,6 +54,8 @@ flight_service = FlightSearchService(serp_api_provider)
 
 trips_with_prices = flight_service.search_flight(trips)
 cheapest_trip, average_price = CheapestTripFinder.find_cheapest(trips_with_prices)
-db.insert_result(cheapest_trip, search_id, "serp_api")
+for trip in trips_with_prices:
+    if trip["price"] is not None:
+        db.insert_result(trip, search_id, "serp_api")
 
 print(format_cheapest_trips(cheapest_trip, average_price))

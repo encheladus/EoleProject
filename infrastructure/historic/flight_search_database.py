@@ -1,12 +1,14 @@
 import sqlite3
+import os
 from datetime import datetime, timezone
 
 class FlightSearchDatabase:
-    def __init__(self, db_path = "eole.db"):
+    def __init__(self, db_path=None):
+        if db_path is None:
+            BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+            db_path = os.path.join(BASE_DIR, "..", "..", "eole.db")
         self.connection = sqlite3.connect(db_path)
-
         self.connection.execute("PRAGMA foreign_keys = ON")
-
         self.create_tables()
 
     def create_tables(self):
